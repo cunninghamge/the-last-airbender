@@ -1,3 +1,13 @@
 <h1>Members of <%= params[:nation].humanize.titleize %></h1>
 
-<p><%= @members.size %> Total Members</p>
+<p><%= @member_count %> Total Members</p>
+
+<% @members.each do |member| %>
+  <div class="member" id='member-<%= member.id %>'>
+    <h3><%= member.name %></h3>
+    <%= image_tag member.photo_url if member.photo_url %>
+    <p>Allies: <%= display_collection(member.allies) %></p>
+    <p>Enemies: <%= display_collection(member.enemies) %></p>
+    <p>Affiliation: <%= member.affiliation %></p>
+  </div>
+<% end %>

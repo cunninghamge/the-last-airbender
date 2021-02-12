@@ -17,7 +17,10 @@ class SearchController < ApplicationController
         body << results
       end
     end
-    body.flatten
+    @member_count = body.flatten.size
+    body.first(25).map do |member_hash|
+      Member.new(member_hash)
+    end
   end
 
   def get_additional_pages(nation, page)

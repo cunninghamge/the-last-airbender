@@ -14,14 +14,14 @@ RSpec.describe 'search index' do
 
     expect(page).to have_content("97 Total Members")
     expect(page).to have_css('.member', count: 25)
-
+    
     members.each do |member|
       within("#member-#{member.id}") do
         expect(page).to have_content(member.name)
-        expect(page).to have_css('img')
-        expect(page).to have_content(member.allies.join(', '))
-        expect(page).to have_content(member.enemies.join(', '))
-        expect(page).to have_content(member.affiliation.join(', '))
+        expect(page).to have_css('img') if member.photo_url
+        expect(page).to have_content("Allies: #{member.allies.join(', ').rstrip}")
+        expect(page).to have_content("Enemies: #{member.enemies.join(', ').rstrip}")
+        expect(page).to have_content(member.affiliation)
       end
     end
   end
