@@ -19,6 +19,10 @@ class SearchFacade
     end
   end
 
+  def self.member_count
+    @member_count
+  end
+
   def self.get_additional_pages(nation, page)
     response = Faraday.get("https://last-airbender-api.herokuapp.com/api/v1/characters?affiliation=#{nation.gsub('_', '+')}") do |req|
       req.params['perPage'] = 25
